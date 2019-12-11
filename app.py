@@ -5,11 +5,20 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
+session = 0
+
 
 @app.route('/')
 @app.route('/index')
 def hello_world():
     return 'Hello World!'
+
+
+@app.route("/create-session", methods=['GET'])
+def create_session():
+    global session
+    session = session + 1
+    return str(session)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
