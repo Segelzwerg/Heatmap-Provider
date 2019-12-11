@@ -14,7 +14,8 @@ def hello_world():
 def upload_file():
     if request.method == 'POST':
         # TODO: save body
-        files = request.files
+        file = request.files['file']
+        file.save(secure_filename(file.name))
         return 'file uploaded successfully'
     elif request.method == 'GET':
         return "Please send a gpx file."
