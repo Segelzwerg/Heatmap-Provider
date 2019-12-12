@@ -1,2 +1,3 @@
-flask
-werkzeug
+Flask==1.1.1
+Werkzeug==0.16.0
+-e git+ssh://git@github.com/Segelzwerg/Strava-local-heatmap.git@4986d9b248c206dc62c8fb6d8ec846341e1f6daf#egg=Strava_local_heatmap
