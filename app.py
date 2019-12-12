@@ -1,5 +1,7 @@
+import argparse
 import os
 
+import strava_local_heatmap
 from flask import Flask, request
 from werkzeug.utils import secure_filename
 
@@ -31,10 +33,48 @@ def upload_file():
         upload_directory = os.path.join(app.instance_path, upload_directory)
         os.makedirs(upload_directory, exist_ok=True)
 
-        file.save(os.path.join(upload_directory, secure_filename(file.name)))
+        file.save(os.path.join(upload_directory, secure_filename(file.filename)))
         return 'file uploaded successfully'
     elif request.method == 'GET':
         return "Please send a gpx file and session id."
+
+
+@app.route('/generate', methods=['GET'])
+def generate():
+    if request.method == 'GET':
+        session_id = request.form['session']
+
+        # param dir
+        dir = os.path.join(app.instance_path, session_id)
+
+        # param file - the filename
+        file = str(session_id) + '.png'
+
+        # setup default values
+        bound = [-90, 90, -180, 180]
+        csv = False
+        glob = '*.gpx'
+        nocdist = False
+        sigma = 1
+        year = 'all'
+        zoom = 10
+
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--dir', default=dir)
+        parser.add_argument('--file', default=file)
+        parser.add_argument('--bound', default=bound)
+        parser.add_argument('--csv', default=csv)
+        parser.add_argument('--glob', default=glob)
+        parser.add_argument('--nocdist', default=nocdist)
+        parser.add_argument('--sigma', default=sigma)
+        parser.add_argument('--year', default=year)
+        parser.add_argument('--zoom', default=zoom)
+
+        args = parser.parse_args()
+
+        strava_local_heatmap.main(args)
+        return "Generated"
+    return "Failed to generate."
 
 
 if __name__ == '__main__':
