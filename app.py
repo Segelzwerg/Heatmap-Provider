@@ -2,7 +2,7 @@ import argparse
 import os
 
 import strava_local_heatmap
-from flask import Flask, request
+from flask import Flask, request, send_file
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -48,7 +48,7 @@ def generate():
         dir = os.path.join(app.instance_path, session_id)
 
         # param file - the filename
-        file = str(session_id) + '.png'
+        file = str(session_id)
 
         # setup default values
         bound = [-90, 90, -180, 180]
@@ -75,6 +75,18 @@ def generate():
         strava_local_heatmap.main(args)
         return "Generated"
     return "Failed to generate."
+
+
+@app.route("/get-image", methods=['GET'])
+def get_image():
+    if request.method == 'GET':
+        session_id = request.form['session']
+        path = os.path.dirname(app.instance_path)
+        file_name = os.path.join(path, str(session_id) + ".png")
+        if os.path.isfile(file_name):
+            return send_file(file_name, mimetype='image/png')
+        return "Response not done yet, make sure you you started the generation process by sending a get request to " \
+               "/generate with your session id. "
 
 
 if __name__ == '__main__':
