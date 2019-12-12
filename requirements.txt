@@ -1,6 +1,3 @@
 Flask==1.1.1
 Werkzeug==0.16.0
--e git+ssh://git@github.com/Segelzwerg/Strava-local-heatmap.git@4986d9b248c206dc62c8fb6d8ec846341e1f6daf#egg=Strava_local_heatmap
-# Strava Local Heatmap requirements
-numpy
-matplotlib
+git+https://github.com/Segelzwerg/Strava-local-heatmap.git@7391029253f26fdd3a616a677cedbfb62290b4b2#egg=Strava_local_heatmap
