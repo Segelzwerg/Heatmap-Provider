@@ -31,7 +31,7 @@ def upload_file():
         upload_directory = os.path.join(app.instance_path, upload_directory)
         os.makedirs(upload_directory, exist_ok=True)
 
-        file.save(os.path.join(upload_directory, secure_filename(file.name)))
+        file.save(os.path.join(upload_directory, secure_filename(file.filename)))
         return 'file uploaded successfully'
     elif request.method == 'GET':
         return "Please send a gpx file and session id."
