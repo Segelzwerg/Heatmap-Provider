@@ -77,7 +77,7 @@ def generate():
     return "Failed to generate."
 
 
-@app.route("/get-image", methods=['GET'])
+@app.route("/get-image", methods=['POST'])
 def get_image():
     if request.method == 'GET':
         session_id = request.form['session']
