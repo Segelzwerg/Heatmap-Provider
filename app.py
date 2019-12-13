@@ -39,9 +39,9 @@ def upload_file():
         return "Please send a gpx file and session id."
 
 
-@app.route('/generate', methods=['GET'])
+@app.route('/generate', methods=['POST'])
 def generate():
-    if request.method == 'GET':
+    if request.method == 'POST':
         session_id = request.form['session']
 
         # param dir
