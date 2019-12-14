@@ -18,4 +18,3 @@ COPY app.py /app/app.py
 
 ENTRYPOINT ["python"]
 CMD ["app.py"]
-EXPOSE 5000
