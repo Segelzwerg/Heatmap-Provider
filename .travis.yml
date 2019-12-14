@@ -7,4 +7,6 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_398a94316026_key -iv $encrypted_398a94316026_iv
   -in travis.pub.enc -out travis.pub -d
 script:
-  - python app.py
+  - python app.py &
+  - sleep 25
+  - travis_terminate 0
