@@ -1,5 +1,6 @@
 import argparse
 import os
+import shutil
 
 import strava_local_heatmap
 from flask import Flask, request, send_file
@@ -26,6 +27,7 @@ def create_session():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        r = request
         file = request.files['file']
         session_id = request.form['session']
 
@@ -92,6 +94,12 @@ def get_image():
                "/generate with your session id. "
     return "Could not retrieve image."
 
+
 if __name__ == '__main__':
+    dirname = app.instance_path
+    try:
+        shutil.rmtree(dirname)
+    except:
+        print("Already clean instance.")
     print("Heatmap Provider is online.")
     app.run()
