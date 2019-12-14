@@ -27,13 +27,14 @@ def create_session():
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
-        upload_directory = request.form['session']
+        session_id = request.form['session']
 
         # creates user folder
-        upload_directory = os.path.join(app.instance_path, upload_directory)
+        upload_directory = os.path.join(app.instance_path, session_id)
         os.makedirs(upload_directory, exist_ok=True)
 
         file.save(os.path.join(upload_directory, secure_filename(file.filename)))
+        print("Uploaded a file for session: " + str(session_id))
         return 'file uploaded successfully'
     elif request.method == 'GET':
         return "Please send a gpx file and session id."
@@ -73,21 +74,24 @@ def generate():
         args = parser.parse_args()
 
         strava_local_heatmap.main(args)
+        print("Generated a image for session: " + str(session_id))
         return "Generated"
     return "Failed to generate."
 
 
 @app.route("/get-image", methods=['POST'])
 def get_image():
-    if request.method == 'GET':
+    if request.method == 'POST':
         session_id = request.form['session']
         path = os.path.dirname(app.instance_path)
         file_name = os.path.join(path, str(session_id) + ".png")
         if os.path.isfile(file_name):
+            print("Send image for session: " + str(session_id))
             return send_file(file_name, mimetype='image/png')
         return "Response not done yet, make sure you you started the generation process by sending a get request to " \
                "/generate with your session id. "
-
+    return "Could not retrieve image."
 
 if __name__ == '__main__':
+    print("Heatmap Provider is online.")
     app.run()
