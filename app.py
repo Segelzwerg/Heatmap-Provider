@@ -27,7 +27,6 @@ def create_session():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        r = request
         file = request.files['file']
         session_id = request.form['session']
 
@@ -99,7 +98,8 @@ if __name__ == '__main__':
     dirname = app.instance_path
     try:
         shutil.rmtree(dirname)
-    except:
+    except Exception as e:
+        print(e)
         print("Already clean instance.")
     print("Heatmap Provider is online.")
     app.run()
