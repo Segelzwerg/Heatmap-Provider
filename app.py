@@ -72,9 +72,12 @@ def generate():
         parser.add_argument('--year', default=year)
         parser.add_argument('--zoom', default=zoom)
 
-        args = parser.parse_args()
+        args, _ = parser.parse_known_args()
 
-        strava_local_heatmap.main(args)
+        try:
+            strava_local_heatmap.main(args)
+        except Exception as e:
+            return e
         print("Generated a image for session: " + str(session_id))
         return "Generated"
     return "Failed to generate."
