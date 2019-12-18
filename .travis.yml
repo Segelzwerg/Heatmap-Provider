@@ -12,5 +12,5 @@ script:
   - sleep 25
 
 after_script:
-  - codecov -t $CODECOV_TOKEN$
+  - codecov -t $CODECOV_TOKEN
   - travis_terminate 0
