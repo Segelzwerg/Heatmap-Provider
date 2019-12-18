@@ -130,4 +130,10 @@ dmypy.json
 
 # IDEs
 .idea/
+
+#travus
 /travis.pub
+
+#test resources
+/tests/1.png
+/tests/tiles/
