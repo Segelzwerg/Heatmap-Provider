@@ -9,7 +9,7 @@ before_install:
 script:
   - python app.py &
   - sleep 25
-  - travis_terminate 0
 
-after_success:
-  - codecov
+after_script:
+  - codecov --token=${{secrets.CODECOV_TOKEN}}
+  - travis_terminate 0
