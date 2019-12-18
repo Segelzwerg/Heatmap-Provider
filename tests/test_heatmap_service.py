@@ -10,3 +10,4 @@ class Test(TestCase):
         path = os.path.dirname(gpx)
         result = heatmap_service("1", path)
         assert result == "Generated"
+        assert os.path.isfile("1.png")
