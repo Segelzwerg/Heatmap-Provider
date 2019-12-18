@@ -3,6 +3,7 @@ python:
 - 3.8
 install:
 - pip install -r requirements.txt
+- pip install --user codecov
 before_install:
 - openssl aes-256-cbc -K $encrypted_398a94316026_key -iv $encrypted_398a94316026_iv
   -in travis.pub.enc -out travis.pub -d
