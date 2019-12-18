@@ -10,3 +10,6 @@ script:
   - python app.py &
   - sleep 25
   - travis_terminate 0
+
+after_success:
+  - codecov
