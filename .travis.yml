@@ -11,5 +11,5 @@ script:
   - sleep 25
 
 after_script:
-  - codecov --token=${{secrets.CODECOV_TOKEN}}
+  - codecov
   - travis_terminate 0
