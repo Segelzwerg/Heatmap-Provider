@@ -13,6 +13,6 @@ script:
   - sleep 25
 
 after_script:
-  - py.test --cov-report=xml --cov=Heatmap-Provider tests/
+  - py.test --cov-report=xml --cov=./
   - codecov -t $CODECOV_TOKEN
   - travis_terminate 0
