@@ -4,6 +4,7 @@ python:
 install:
 - pip install -r requirements.txt
 - pip install codecov
+- pip install pytest-cov
 before_install:
 - openssl aes-256-cbc -K $encrypted_398a94316026_key -iv $encrypted_398a94316026_iv
   -in travis.pub.enc -out travis.pub -d
@@ -12,5 +13,6 @@ script:
   - sleep 25
 
 after_script:
+  - py.test --cov-report=xml --cov=Heatmap-Provider tests/
   - codecov -t $CODECOV_TOKEN
   - travis_terminate 0
