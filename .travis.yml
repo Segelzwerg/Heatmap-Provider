@@ -10,7 +10,14 @@ before_install:
 script:
   - python app.py &
   - sleep 25
+<<<<<<< HEAD
 
 after_script:
   - codecov -t $CODECOV_TOKEN
   - travis_terminate 0
+=======
+  - travis_terminate 0
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+>>>>>>> master
