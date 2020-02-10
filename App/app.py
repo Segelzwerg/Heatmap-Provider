@@ -53,7 +53,10 @@ def upload_file():
 def generate():
     if request.method == 'POST':
         session_id = request.form['session']
-
+        if not any(fname.endswith('.gpx') for fname in os.listdir('.')):
+            error_msg = "No gpx files for that session saved. Please upload some."
+            print(error_msg)
+            return error_msg
         return heatmap_service(app.instance_path, session_id)
     return "Failed to generate."
 
