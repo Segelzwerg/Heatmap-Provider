@@ -1,4 +1,5 @@
 pytest
 Flask==1.1.1
 Werkzeug==0.16.0
+gunicorn
 git+https://github.com/Segelzwerg/Strava-local-heatmap.git@7391029253f26fdd3a616a677cedbfb62290b4b2#egg=Strava_local_heatmap
