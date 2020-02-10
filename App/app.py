@@ -71,6 +71,7 @@ def get_image():
         if os.path.isfile(file_name):
             print("Send image for session: " + str(session_id))
             return send_file(file_name, mimetype='image/png')
+        print("File does not exists: " + file_name)
         error_msg = "Response not done yet, make sure you you started the generation process by sending a get request " \
                     "to /generate with your session id. "
         print(error_msg)
