@@ -12,11 +12,12 @@ session = 0
 
 
 def create_app():
-    return app;
+    return app
 
 
 def test_client():
     app.testing = True
+
 
 @app.route('/')
 @app.route('/index')
