@@ -66,8 +66,8 @@ def generate():
 def get_image():
     if request.method == 'POST':
         session_id = request.form['session']
-        path = os.path.dirname(app.instance_path)
-        file_name = os.path.join(path, str(session_id) + ".png")
+        upload_directory = os.path.join(app.instance_path, session_id)
+        file_name = os.path.join(upload_directory, ".png")
         if os.path.isfile(file_name):
             print("Send image for session: " + str(session_id))
             return send_file(file_name, mimetype='image/png')
