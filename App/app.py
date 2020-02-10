@@ -71,9 +71,13 @@ def get_image():
         if os.path.isfile(file_name):
             print("Send image for session: " + str(session_id))
             return send_file(file_name, mimetype='image/png')
-        return "Response not done yet, make sure you you started the generation process by sending a get request to " \
-               "/generate with your session id. "
-    return "Could not retrieve image."
+        error_msg = "Response not done yet, make sure you you started the generation process by sending a get request " \
+                    "to /generate with your session id. "
+        print(error_msg)
+        return error_msg
+    error_msg = "Could not retrieve image."
+    print(error_msg)
+    return error_msg
 
 
 if __name__ == '__main__':
